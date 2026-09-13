@@ -244,5 +244,61 @@ export const NOTES_DATA: Note[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'born-oppenheimer',
+    title: 'The Born-Oppenheimer Approximation & Molecular Orbitals',
+    category: 'Quantum Chemistry',
+    date: '12 Mar 2026',
+    readTime: '6 min read',
+    summary: 'Decoupling electronic and nuclear motion based on the mass disparity m_e / M_n ≪ 1, creating adiabatic potential energy surfaces for chemical bonds.',
+    keyEquation: '\\hat{H}_{\\text{total}} = \\hat{T}_n + \\hat{T}_e + \\hat{V}_{en} + \\hat{V}_{ee} + \\hat{V}_{nn}',
+    relatedTools: ['constants', 'plotter'],
+    references: [
+      'Born, M., & Oppenheimer, R. (1927). Zur Quantentheorie der Molekeln. Annalen der Physik.',
+      'Szabo, A., & Ostlund, N. S. (1996). Modern Quantum Chemistry.'
+    ],
+    sections: [
+      {
+        id: 'bo-mass-ratio',
+        title: '1. Nuclear vs. Electronic Time Scales',
+        content: 'Because atomic nuclei are at least 1,836 times more massive than electrons (M_proton / m_e ≈ 1836), electrons adjust their quantum distribution almost instantaneously to any nuclear repositioning.',
+        latex: '\\frac{m_e}{M_{\\text{nucleus}}} \\le \\frac{1}{1836} \\ll 1',
+        derivationSteps: [
+          {
+            step: 'Clamped-Nuclei Hamiltonian',
+            explanation: 'Treating nuclear positions R as fixed classical parameters, the electronic Hamiltonian simplifies to:',
+            latex: '\\hat{H}_e = -\\sum_i \\frac{\\hbar^2}{2m_e}\\nabla_i^2 - \\sum_{i,A} \\frac{Z_A e^2}{4\\pi\\varepsilon_0 r_{iA}} + \\sum_{i<j} \\frac{e^2}{4\\pi\\varepsilon_0 r_{ij}}'
+          },
+          {
+            step: 'Adiabatic Potential Energy Surface',
+            explanation: 'The eigenvalues E_e(R) plus nuclear Coulomb repulsion V_{nn}(R) define the effective potential in which nuclei vibrate and rotate:',
+            latex: 'V_{\\text{eff}}(R) = E_e(R) + \\sum_{A<B} \\frac{Z_A Z_B e^2}{4\\pi\\varepsilon_0 R_{AB}}'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'crank-nicolson-pde',
+    title: 'Finite-Difference Discretization: The Crank-Nicolson Scheme',
+    category: 'Computational Physics',
+    date: '15 Mar 2026',
+    readTime: '7 min read',
+    summary: 'Formulating unconditionally stable, norm-preserving implicit time integration for parabolic and Schrödinger partial differential equations.',
+    keyEquation: '\\left( \\mathbf{I} + \\frac{i\\Delta t}{2\\hbar}\\mathbf{H} \\right) \\Psi^{n+1} = \\left( \\mathbf{I} - \\frac{i\\Delta t}{2\\hbar}\\mathbf{H} \\right) \\Psi^n',
+    relatedTools: ['plotter', 'data-analysis'],
+    references: [
+      'Crank, J., & Nicolson, P. (1947). A practical method for numerical evaluation of solutions of partial differential equations of the heat-conduction type.',
+      'Press, W. H. et al. (2007). Numerical Recipes: The Art of Scientific Computing.'
+    ],
+    sections: [
+      {
+        id: 'stability-comparison',
+        title: '1. Explicit vs. Implicit Discretization',
+        content: 'Standard forward-time centered-space (FTCS) explicit schemes are numerically unstable for the Schrödinger equation. Crank-Nicolson averages forward and backward time steps at half-integer step n + 1/2, yielding unconditional numerical stability and exact unitarity.',
+        latex: '\\frac{\\Psi^{n+1} - \\Psi^n}{\\Delta t} = -\\frac{i}{\\hbar}\\mathbf{H}\\left( \\frac{\\Psi^{n+1} + \\Psi^n}{2} \\right)'
+      }
+    ]
   }
 ];

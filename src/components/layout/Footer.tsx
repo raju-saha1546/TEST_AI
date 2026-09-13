@@ -1,5 +1,6 @@
 import React from 'react';
-import { Atom, Github, Mail, Sparkles, Terminal, BookOpen, Wrench } from 'lucide-react';
+import { Atom, Github, Mail, Linkedin, ArrowUpRight } from 'lucide-react';
+import { PERSONAL_DATA } from '../../data/personal';
 
 interface FooterProps {
   onNavigate: (tab: string) => void;
@@ -17,81 +18,91 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <Atom className="w-4 h-4" />
               </div>
               <span className="font-display font-bold text-slate-100 text-sm">
-                Raju • Digital Physics Laboratory
+                Raju • Physics Student
               </span>
             </div>
 
             <p className="text-slate-400 leading-relaxed max-w-sm">
-              An open-source digital physics laboratory, computational notebook, and mathematical simulation platform built by Raju, undergraduate physics student.
+              Exploring physics through theory, mathematics, computation, experimentation, electronics, and code. Documenting my undergraduate journey from first principles.
             </p>
 
-            <div className="font-serif italic text-slate-400 text-[11px] pt-1 border-l-2 border-slate-700 pl-3">
-              "Nullius in verba" — Take nobody's word for it. Calculate, simulate, and measure from first principles.
+            <div className="font-mono text-slate-400 text-[11px] pt-1">
+              Physics • Computation • Experiments
             </div>
           </div>
 
           {/* Col 2: Navigation Links */}
-          <div className="md:col-span-3 space-y-2">
-            <h4 className="font-mono text-[11px] uppercase tracking-wider text-slate-200 font-semibold mb-3">
-              Laboratory Modules
-            </h4>
-            <ul className="space-y-2 font-medium">
-              <li>
-                <button onClick={() => onNavigate('lab')} className="hover:text-cyan-400 transition">
-                  Interactive Calculators & Suite
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('simulations')} className="hover:text-cyan-400 transition">
-                  Real-Time Physics Simulations
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('notes')} className="hover:text-cyan-400 transition">
-                  Theoretical Physics Notebook
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('experiments')} className="hover:text-cyan-400 transition">
-                  Experimental Laboratory Logs
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('projects')} className="hover:text-cyan-400 transition">
-                  Scientific Software Projects
-                </button>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 3: Reference & Academic Standard */}
           <div className="md:col-span-4 space-y-2">
             <h4 className="font-mono text-[11px] uppercase tracking-wider text-slate-200 font-semibold mb-3">
-              Academic Standards & Stack
+              Portfolio & Notebook
             </h4>
-            <p className="text-slate-400 leading-relaxed text-[11px]">
-              Equations rendered via KaTeX. Numerical integration via 4th-order Runge-Kutta and Euler-Cromer algorithms. Constants referenced from NIST / CODATA 2022 recommended values.
-            </p>
-            <div className="flex items-center gap-2 pt-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span className="font-mono text-[11px] text-emerald-400">All numerical engines operational</span>
+            <div className="grid grid-cols-2 gap-2 font-medium">
+              <button onClick={() => onNavigate('home')} className="text-left hover:text-cyan-400 transition">
+                Home
+              </button>
+              <button onClick={() => onNavigate('about')} className="text-left hover:text-cyan-400 transition">
+                About
+              </button>
+              <button onClick={() => onNavigate('journey')} className="text-left hover:text-cyan-400 transition">
+                Journey Timeline
+              </button>
+              <button onClick={() => onNavigate('projects')} className="text-left hover:text-cyan-400 transition">
+                Projects Showcase
+              </button>
+              <button onClick={() => onNavigate('notes')} className="text-left hover:text-cyan-400 transition">
+                Physics Notes
+              </button>
+              <button onClick={() => onNavigate('lab')} className="text-left hover:text-cyan-400 transition">
+                Lab Notebook
+              </button>
+              <button onClick={() => onNavigate('tools')} className="text-left hover:text-cyan-400 transition">
+                My Physics Lab
+              </button>
+              <button onClick={() => onNavigate('contact')} className="text-left hover:text-cyan-400 transition">
+                Contact
+              </button>
+            </div>
+          </div>
+
+          {/* Col 3: Academic Channels */}
+          <div className="md:col-span-3 space-y-3">
+            <h4 className="font-mono text-[11px] uppercase tracking-wider text-slate-200 font-semibold">
+              Connect & Source
+            </h4>
+            <div className="space-y-2 font-mono text-xs">
+              <a
+                href={PERSONAL_DATA.contact.github}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 hover:text-cyan-300 transition"
+              >
+                <Github className="w-3.5 h-3.5 text-cyan-400" />
+                <span>raju-saha1546</span>
+                <ArrowUpRight className="w-3 h-3 text-slate-400" />
+              </a>
+              <button
+                onClick={() => onNavigate('contact')}
+                className="flex items-center gap-2 hover:text-cyan-300 transition"
+              >
+                <Mail className="w-3.5 h-3.5 text-cyan-400" />
+                <span>{PERSONAL_DATA.contact.email}</span>
+              </button>
+            </div>
+            <div className="text-[11px] text-slate-400 pt-1">
+              {PERSONAL_DATA.contact.note}
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-4 text-slate-400 text-[11px] font-mono">
+        <div className="pt-8 border-t border-slate-900 flex flex-wrap items-center justify-between gap-4 text-[11px] font-mono text-slate-400">
           <div>
-            © {new Date().getFullYear()} Raju. Crafted for scientific education and computational physics.
+            © {new Date().getFullYear()} Raju. Crafted for scientific exploration & physics learning.
           </div>
           <div className="flex items-center gap-4">
-            <a href="https://github.com" target="_blank" rel="noreferrer" className="hover:text-slate-200 transition">
-              GitHub
-            </a>
+            <span>KaTeX & Math Rendering</span>
             <span>•</span>
-            <a href="mailto:raju.physics.lab@example.com" className="hover:text-slate-200 transition">
-              raju.physics.lab@example.com
-            </a>
+            <span>Static SPA (GitHub Pages Ready)</span>
           </div>
         </div>
       </div>

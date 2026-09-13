@@ -3,25 +3,30 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import CommandPalette from './components/common/CommandPalette';
 import HomePage from './components/home/HomePage';
-import LabDashboard from './components/tools/LabDashboard';
-import SimulationsPlatform from './components/simulations/SimulationsPlatform';
+import AboutPage from './components/about/AboutPage';
+import JourneyPage from './components/journey/JourneyPage';
+import ProjectsShowcase from './components/projects/ProjectsShowcase';
 import NotesReader from './components/notes/NotesReader';
 import LabNotebookViewer from './components/lab/LabNotebookViewer';
-import ProjectsShowcase from './components/projects/ProjectsShowcase';
-import AboutPage from './components/about/AboutPage';
+import ToolsPlatform from './components/tools/ToolsPlatform';
+import ContactSection from './components/contact/ContactSection';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('home');
-  const [activeToolSubId, setActiveToolSubId] = useState<string | undefined>(undefined);
-  const [activeSimSubId, setActiveSimSubId] = useState<string | undefined>(undefined);
+  const [activeItemId, setActiveItemId] = useState<string | undefined>(undefined);
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
 
   const handleNavigate = (tab: string, subId?: string) => {
-    setActiveTab(tab);
-    if (tab === 'lab' && subId) {
-      setActiveToolSubId(subId);
-    } else if (tab === 'simulations' && subId) {
-      setActiveSimSubId(subId);
+    // Normalization for aliases
+    if (tab === 'simulations') {
+      setActiveTab('tools');
+      if (subId) setActiveItemId(subId);
+    } else if (tab === 'experiments') {
+      setActiveTab('lab');
+      if (subId) setActiveItemId(subId);
+    } else {
+      setActiveTab(tab);
+      if (subId) setActiveItemId(subId);
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -45,12 +50,13 @@ export default function App() {
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
         {activeTab === 'home' && <HomePage onNavigate={handleNavigate} />}
-        {activeTab === 'lab' && <LabDashboard key={activeToolSubId} initialToolId={activeToolSubId || 'resistor'} />}
-        {activeTab === 'simulations' && <SimulationsPlatform key={activeSimSubId} initialSimId={activeSimSubId || 'projectile'} />}
-        {activeTab === 'notes' && <NotesReader onOpenSimulation={id => handleNavigate('simulations', id)} />}
-        {activeTab === 'experiments' && <LabNotebookViewer />}
+        {activeTab === 'about' && <AboutPage onNavigate={handleNavigate} />}
+        {activeTab === 'journey' && <JourneyPage onNavigate={handleNavigate} />}
         {activeTab === 'projects' && <ProjectsShowcase />}
-        {activeTab === 'about' && <AboutPage />}
+        {activeTab === 'notes' && <NotesReader onOpenSimulation={id => handleNavigate('tools', id)} />}
+        {activeTab === 'lab' && <LabNotebookViewer />}
+        {activeTab === 'tools' && <ToolsPlatform initialItemId={activeItemId || 'resistor'} />}
+        {activeTab === 'contact' && <ContactSection />}
       </main>
 
       {/* Global Footer */}

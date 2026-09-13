@@ -28,21 +28,26 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
   const allItems: SearchItem[] = useMemo(() => {
     const list: SearchItem[] = [
       // Tools
-      { id: 't1', title: 'Resistor Color Code Calculator', subtitle: 'Decode 4-band and 5-band nominal values and tolerances', category: 'Tools', tab: 'lab', subId: 'resistor' },
-      { id: 't2', title: "Ohm's Law & DC Power Solver", subtitle: 'DC voltage drops, current flow, and thermal dissipation', category: 'Tools', tab: 'lab', subId: 'ohms-law' },
-      { id: 't3', title: 'Scientific Unit Converter', subtitle: 'SI unit conversions with scientific notation parsing', category: 'Tools', tab: 'lab', subId: 'unit-converter' },
-      { id: 't4', title: 'Scientific Function Plotter', subtitle: 'Multi-curve graphing with analytical coordinates inspection', category: 'Tools', tab: 'lab', subId: 'plotter' },
-      { id: 't5', title: 'Experimental Data Analysis & Curve Fitting', subtitle: 'Non-linear least squares regression & CSV data upload', category: 'Tools', tab: 'lab', subId: 'data-analysis' },
-      { id: 't6', title: 'Physical Constants Database', subtitle: 'CODATA fundamental physical constants with uncertainties', category: 'Tools', tab: 'lab', subId: 'constants' },
-      { id: 't7', title: 'Physics Formula Explorer', subtitle: 'Equations, variable breakdowns and worked examples', category: 'Tools', tab: 'lab', subId: 'formulas' },
-      { id: 't8', title: 'Educational DC Circuit Simulator', subtitle: 'Series, parallel, and voltage divider loops with live LED', category: 'Tools', tab: 'lab', subId: 'circuit-sim' },
+      { id: 't1', title: 'Resistor Color Code Calculator', subtitle: 'Decode 4-band and 5-band nominal values and tolerances', category: 'Tools', tab: 'tools', subId: 'resistor' },
+      { id: 't2', title: "Ohm's Law & DC Power Solver", subtitle: 'DC voltage drops, current flow, and thermal dissipation', category: 'Tools', tab: 'tools', subId: 'ohms-law' },
+      { id: 't3', title: 'Scientific Unit Converter', subtitle: 'SI unit conversions with scientific notation parsing', category: 'Tools', tab: 'tools', subId: 'unit-converter' },
+      { id: 't4', title: 'Scientific Function Plotter', subtitle: 'Multi-curve graphing with analytical coordinates inspection', category: 'Tools', tab: 'tools', subId: 'plotter' },
+      { id: 't5', title: 'Experimental Data Analysis & Curve Fitting', subtitle: 'Non-linear least squares regression & CSV data upload', category: 'Tools', tab: 'tools', subId: 'data-analysis' },
+      { id: 't6', title: 'Physical Constants Database', subtitle: 'CODATA fundamental physical constants with uncertainties', category: 'Tools', tab: 'tools', subId: 'constants' },
+      { id: 't7', title: 'Physics Formula Explorer', subtitle: 'Equations, variable breakdowns and worked examples', category: 'Tools', tab: 'tools', subId: 'formulas' },
+      { id: 't8', title: 'Educational DC Circuit Simulator', subtitle: 'Series, parallel, and voltage divider loops with live LED', category: 'Tools', tab: 'tools', subId: 'circuit-sim' },
 
       // Simulations
-      { id: 's1', title: 'Ballistic Projectile & Aerodynamic Drag', subtitle: '2D kinematics with quadratic air resistance and planetary gravity', category: 'Simulations', tab: 'simulations', subId: 'projectile' },
-      { id: 's2', title: 'Harmonic Oscillator & Phase Space Dynamics', subtitle: 'Damped & driven oscillations with phase orbit portraits', category: 'Simulations', tab: 'simulations', subId: 'harmonic' },
-      { id: 's3', title: 'Double Pendulum & Deterministic Chaos', subtitle: 'Lagrangian dynamics with twin Lyapunov divergence', category: 'Simulations', tab: 'simulations', subId: 'double-pendulum' },
-      { id: 's4', title: 'Double-Slit Wave Interference & Diffraction', subtitle: 'Coherent optical wave superposition and chromatic laser diffraction', category: 'Simulations', tab: 'simulations', subId: 'waves' },
-      { id: 's5', title: 'Coulomb Electric Field & Potential Manifold', subtitle: 'Multi-pole electrostatic vectors and scalar potential fields', category: 'Simulations', tab: 'simulations', subId: 'electric-field' }
+      { id: 's1', title: 'Ballistic Projectile & Aerodynamic Drag', subtitle: '2D kinematics with quadratic air resistance and planetary gravity', category: 'Simulations', tab: 'tools', subId: 'projectile' },
+      { id: 's2', title: 'Harmonic Oscillator & Phase Space Dynamics', subtitle: 'Damped & driven oscillations with phase orbit portraits', category: 'Simulations', tab: 'tools', subId: 'harmonic' },
+      { id: 's3', title: 'Double Pendulum & Deterministic Chaos', subtitle: 'Lagrangian dynamics with twin Lyapunov divergence', category: 'Simulations', tab: 'tools', subId: 'double-pendulum' },
+      { id: 's4', title: 'Double-Slit Wave Interference & Diffraction', subtitle: 'Coherent optical wave superposition and chromatic laser diffraction', category: 'Simulations', tab: 'tools', subId: 'waves' },
+      { id: 's5', title: 'Coulomb Electric Field & Potential Manifold', subtitle: 'Multi-pole electrostatic vectors and scalar potential fields', category: 'Simulations', tab: 'tools', subId: 'electric-field' },
+
+      // Core Sections
+      { id: 'sec-about', title: 'About Raju (Academic Profile)', subtitle: 'Personal philosophy, background, and approach to physics', category: 'Notes', tab: 'about' },
+      { id: 'sec-journey', title: 'My Physics Journey (Timeline)', subtitle: 'Milestones, coursework, and laboratory reflections', category: 'Notes', tab: 'journey' },
+      { id: 'sec-contact', title: 'Contact & Inquiries', subtitle: 'Academic communication channels and collaboration', category: 'Notes', tab: 'contact' }
     ];
 
     // Add Notes
@@ -64,7 +69,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
         title: e.title,
         subtitle: e.experiment,
         category: 'Experiments',
-        tab: 'experiments',
+        tab: 'lab',
         subId: e.id
       });
     });

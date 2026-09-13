@@ -1,4 +1,14 @@
-export type NavTab = 'home' | 'about' | 'projects' | 'notes' | 'lab' | 'notebook' | 'contact';
+export type NavTab =
+  | 'home'
+  | 'about'
+  | 'journey'
+  | 'projects'
+  | 'notes'
+  | 'lab'
+  | 'tools'
+  | 'contact'
+  | 'simulations'
+  | 'experiments';
 
 export interface Project {
   id: string;
@@ -40,7 +50,15 @@ export interface NoteSection {
 export interface Note {
   id: string;
   title: string;
-  category: 'Quantum Mechanics' | 'Electromagnetism' | 'Classical Mechanics' | 'Thermodynamics' | 'Mathematical Physics' | 'Electronics';
+  category:
+    | 'Quantum Mechanics'
+    | 'Quantum Chemistry'
+    | 'Classical Mechanics'
+    | 'Electromagnetism'
+    | 'Mathematical Physics'
+    | 'Electronics'
+    | 'Computational Physics'
+    | 'Thermodynamics';
   date: string;
   readTime: string;
   summary: string;

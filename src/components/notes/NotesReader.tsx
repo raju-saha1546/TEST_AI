@@ -13,7 +13,16 @@ export const NotesReader: React.FC<NotesReaderProps> = ({ onOpenSimulation }) =>
   const [activeNoteId, setActiveNoteId] = useState<string>(NOTES_DATA[0].id);
   const [expandedSteps, setExpandedSteps] = useState<Record<string, boolean>>({});
 
-  const categories = ['All', 'Quantum Mechanics', 'Electromagnetism', 'Classical Mechanics', 'Electronics & Instrumentation'];
+  const categories = [
+    'All',
+    'Quantum Mechanics',
+    'Quantum Chemistry',
+    'Classical Mechanics',
+    'Electromagnetism',
+    'Mathematical Physics',
+    'Electronics',
+    'Computational Physics'
+  ];
 
   const filteredNotes = useMemo(() => {
     return NOTES_DATA.filter(n => {

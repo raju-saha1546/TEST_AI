@@ -1,242 +1,220 @@
 import React from 'react';
-import { Atom, BookOpen, Cpu, Terminal, Compass, GraduationCap, Github, Mail, Sparkles, Award, ArrowUpRight } from 'lucide-react';
+import {
+  User,
+  Atom,
+  BookOpen,
+  Cpu,
+  Terminal,
+  Compass,
+  GraduationCap,
+  Sparkles,
+  Camera,
+  CheckCircle2,
+  ArrowRight,
+  ExternalLink,
+  Code
+} from 'lucide-react';
+import { PERSONAL_DATA } from '../../data/personal';
+import MathView from '../common/MathView';
 
-export const AboutPage: React.FC = () => {
-  const skills = [
+interface AboutPageProps {
+  onNavigate?: (tab: string, subId?: string) => void;
+}
+
+export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
+  const competencies = [
     {
-      category: 'Computation & Scientific Programming',
-      items: ['Python (NumPy, SciPy, Matplotlib)', 'C / C++', 'Julia', 'LaTeX Typesetting', 'Git & Bash Scripting', 'Numerical PDEs (FD, Spectral)']
+      category: 'Theory & Mathematical Modeling',
+      icon: Atom,
+      description: 'Deriving physical laws from first principles, variational action methods, and boundary-value differential systems.',
+      skills: ['Lagrangian & Hamiltonian Mechanics', 'Wave Equation & Superposition', 'Schrödinger Equation & Operators', 'Vector Calculus & Complex Analysis']
     },
     {
-      category: 'Laboratory & Instrumentation',
-      items: ['Digital Storage Oscilloscopes', 'Lock-in Amplifiers', '4-Wire Kelvin Resistance', 'Optical Alignment & Interferometry', 'Cryogenics & Vacuum Systems', 'Error Propagation & Least-Squares']
+      category: 'Computation & Numerical Simulation',
+      icon: Terminal,
+      description: 'Formulating stable numerical algorithms to model nonlinear dynamical and quantum systems.',
+      skills: ['Python (NumPy, SciPy, Matplotlib)', 'C / C++ Numerical Routines', 'Runge-Kutta (RK4) Schemes', 'Crank-Nicolson PDE Integration']
+    },
+    {
+      category: 'Laboratory & Experimental Practice',
+      icon: Compass,
+      description: 'Taking physical bench measurements, characterizing sensors, and performing rigorous uncertainty propagation.',
+      skills: ['Digital Oscilloscopes & DMMs', '4-Wire Kelvin Sensing', 'Least-Squares Regression & Residuals', 'Systematic Error Budgets']
     },
     {
       category: 'Electronics & Hardware',
-      items: ['Microcontrollers (Arduino, STM32)', 'TTL & CMOS Digital Logic', 'Analog Filters & Op-Amps', 'SPICE Circuit Simulation', 'PCB Layout (KiCad)', 'Breadboard Prototyping']
-    },
-    {
-      category: 'Theoretical & Mathematical Methods',
-      items: ['Linear Algebra & Vector Calculus', 'Complex Analysis & Residue Calculus', 'Partial Differential Equations', 'Fourier & Laplace Transforms', 'Lagrangian & Hamiltonian Mechanics', 'Canonical Ensemble Statistics']
-    }
-  ];
-
-  const timeline = [
-    {
-      period: '2025 – Present',
-      role: 'Undergraduate Physics Researcher & Lab Assistant',
-      institution: 'Department of Physics & Astronomy',
-      description: 'Investigating numerical algorithms for quantum tunneling through potential barriers, developing custom Python data acquisition pipelines for lab sensors, and tutoring peers in introductory mechanics.'
-    },
-    {
-      period: '2024 – 2025',
-      role: 'Core Member, University Physical Sciences Society',
-      institution: 'Faculty of Science',
-      description: 'Coordinated weekly physics seminars, built interactive demonstrations for university science outreach, and organized hackathons centered around scientific computing.'
-    },
-    {
-      period: '2023 – 2024',
-      role: 'Physics & Mathematics Major Matriculation',
-      institution: 'University Physics Program',
-      description: 'Commenced comprehensive undergraduate studies with foundational honors coursework in Newtonian Mechanics, Special Relativity, Electromagnetism, Multivariable Calculus, and Linear Algebra.'
-    }
-  ];
-
-  const currentReading = [
-    {
-      title: 'Introduction to Quantum Mechanics',
-      author: 'David J. Griffiths & Darrell F. Schroeter',
-      status: 'Reviewing Angular Momentum & Spin'
-    },
-    {
-      title: 'Classical Electrodynamics',
-      author: 'John David Jackson',
-      status: 'Boundary-Value Problems in Electrostatics'
-    },
-    {
-      title: 'The Art of Electronics (3rd Edition)',
-      author: 'Paul Horowitz & Winfield Hill',
-      status: 'Precision Low-Noise Transimpedance Op-Amps'
+      icon: Cpu,
+      description: 'Prototyping analog signal conditioning and discrete digital logic circuits on solderless breadboards.',
+      skills: ['74LS Series TTL Logic', 'Operational Amplifiers & Active Filters', 'Microcontroller Interfacing (Arduino)', 'Sensor Signal Conditioning']
     }
   ];
 
   return (
-    <div className="space-y-10 max-w-5xl mx-auto">
-      {/* Bio Hero Section */}
-      <div className="rounded-3xl border border-slate-700/50 bg-slate-900/60 p-8 md:p-12 backdrop-blur-md relative overflow-hidden">
-        <div className="absolute -right-16 -bottom-16 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div className="space-y-12">
+      {/* Top Banner */}
+      <div className="rounded-2xl border border-slate-700/50 bg-slate-900/60 p-6 md:p-8 backdrop-blur-md">
+        <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-widest font-semibold mb-2">
+          <User className="w-4 h-4" />
+          Academic Profile & Scientific Philosophy
+        </div>
+        <h1 className="text-2xl sm:text-3xl font-bold font-display text-slate-100">
+          About Raju
+        </h1>
+        <p className="text-sm text-slate-300 max-w-2xl mt-1.5 leading-relaxed">
+          Undergraduate physics student driven by curiosity, mathematical reasoning, hands-on experimentation, and scientific programming.
+        </p>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative z-10">
-          <div className="md:col-span-8 space-y-4">
-            <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-widest font-semibold">
-              <GraduationCap className="w-4 h-4" />
-              Academic Profile & Journey
+      {/* Main Profile & Story Card */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Left: Profile Photo Placeholder & Quick Facts */}
+        <div className="lg:col-span-4 space-y-6">
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 text-center space-y-5">
+            {/* Profile Photo Placeholder */}
+            <div className="relative mx-auto w-36 h-36 rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950/40 border-2 border-dashed border-cyan-500/40 flex flex-col items-center justify-center p-4 group hover:border-cyan-400 transition">
+              <Camera className="w-8 h-8 text-cyan-400/70 mb-2 group-hover:scale-110 transition-transform" />
+              <span className="text-[11px] font-mono text-cyan-300 font-semibold">
+                Photo Placeholder
+              </span>
+              <span className="text-[9px] text-slate-400">
+                Replace with portrait
+              </span>
             </div>
 
-            <h1 className="text-3xl md:text-4xl font-extrabold font-display text-slate-100 leading-tight">
-              Raju
-            </h1>
-
-            <p className="text-base text-cyan-300/90 font-medium">
-              University Physics Student • Scientific Programmer • Electronics Enthusiast
-            </p>
-
-            <p className="text-sm text-slate-300 leading-relaxed font-sans">
-              I am an undergraduate physics student with a deep fascination for the fundamental laws governing matter, fields, and light, combined with the practical craft of numerical computing and laboratory instrumentation.
-            </p>
-
-            <p className="text-sm text-slate-400 leading-relaxed">
-              My work bridges theoretical physics, experimental data analysis, and software engineering. I build computational models to simulate complex physical systems, design hardware circuits to measure physical phenomena in the laboratory, and document mathematical derivations with academic rigor.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition"
-              >
-                <Github className="w-4 h-4" />
-                GitHub Profile
-              </a>
-              <a
-                href="mailto:raju.physics.lab@example.com"
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold transition shadow-sm"
-              >
-                <Mail className="w-4 h-4" />
-                Contact / Academic Inquiries
-              </a>
-            </div>
-          </div>
-
-          <div className="md:col-span-4 flex flex-col items-center">
-            {/* Scientific Avatar badge */}
-            <div className="w-48 h-48 rounded-2xl border-2 border-cyan-500/40 bg-slate-950/80 p-4 flex flex-col items-center justify-center text-center shadow-xl relative group">
-              <div className="w-20 h-20 rounded-full bg-cyan-950/80 border border-cyan-500/50 flex items-center justify-center mb-3">
-                <Atom className="w-10 h-10 text-cyan-400 animate-spin-slow" />
+            <div>
+              <h2 className="text-xl font-bold font-display text-slate-100">
+                {PERSONAL_DATA.name}
+              </h2>
+              <div className="text-xs font-mono text-cyan-400 mt-0.5">
+                {PERSONAL_DATA.role}
               </div>
-              <span className="font-display font-bold text-slate-200 text-sm">Raju</span>
-              <span className="text-[11px] font-mono text-slate-400 mt-0.5">B.Sc. Physics Candidate</span>
-              <span className="text-[10px] font-mono text-cyan-400 mt-1">Focus: Quantum & Computation</span>
+              <div className="text-[11px] text-slate-400 mt-1">
+                {PERSONAL_DATA.tagline}
+              </div>
+            </div>
+
+            {/* Quick Meta List */}
+            <div className="border-t border-slate-800/80 pt-4 text-left space-y-2.5 text-xs font-mono">
+              <div className="flex justify-between text-slate-300">
+                <span className="text-slate-400">Focus:</span>
+                <span className="text-slate-200">Theory & Computation</span>
+              </div>
+              <div className="flex justify-between text-slate-300">
+                <span className="text-slate-400">Status:</span>
+                <span className="text-cyan-300">Undergraduate Student</span>
+              </div>
+              <div className="flex justify-between text-slate-300">
+                <span className="text-slate-400">Toolkit:</span>
+                <span className="text-slate-200">Python, C, LaTeX, Arduino</span>
+              </div>
+            </div>
+
+            {onNavigate && (
+              <button
+                onClick={() => onNavigate('contact')}
+                className="w-full py-2 px-4 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 font-mono text-xs font-semibold transition"
+              >
+                Send Academic Message
+              </button>
+            )}
+          </div>
+
+          {/* Guiding Principles Card */}
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6 space-y-3">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-semibold">
+              How I Approach Physics
+            </h3>
+            <ul className="space-y-2.5 text-xs text-slate-300">
+              <li className="flex items-start gap-2">
+                <span className="text-cyan-400 mt-0.5">•</span>
+                <span>Unpack the mathematical reasoning behind every equation rather than treating it as a black box.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-cyan-400 mt-0.5">•</span>
+                <span>Cross-check analytical models against bench measurements to quantify real-world uncertainties.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-cyan-400 mt-0.5">•</span>
+                <span>Use code and simulation to gain physical intuition for nonlinear or chaotic systems.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-cyan-400 mt-0.5">•</span>
+                <span>Document derivations, circuit quirks, and error budgets rigorously in my notebook.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Right: Personal Narrative */}
+        <div className="lg:col-span-8 space-y-8">
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 sm:p-8 space-y-6">
+            <div className="space-y-2">
+              <h2 className="text-xl sm:text-2xl font-bold font-display text-slate-100">
+                Who I Am & What Drives Me
+              </h2>
+              <p className="text-xs font-mono text-cyan-400">
+                {PERSONAL_DATA.mainStatement}
+              </p>
+            </div>
+
+            <div className="space-y-4 text-sm text-slate-300 leading-relaxed">
+              {PERSONAL_DATA.aboutParagraphs.map((para, idx) => (
+                <p key={idx}>{para}</p>
+              ))}
+            </div>
+
+            {/* Quote / Formula Callout */}
+            <div className="p-4 sm:p-5 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2">
+              <div className="text-xs font-mono text-slate-400">
+                Foundational Principle I Think About Often:
+              </div>
+              <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-cyan-300">
+                <span>Hamilton's Principle of Stationary Action:</span>
+                <MathView math="\delta S = \delta \int_{t_1}^{t_2} \mathcal{L}(q, \dot{q}, t)\, dt = 0" />
+              </div>
+              <p className="text-[11px] text-slate-400 italic">
+                From a single variational principle, the equations of motion for Newtonian mechanics, optics, and quantum path integrals naturally unfold.
+              </p>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Research & Intellectual Interests */}
-      <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 md:p-8 backdrop-blur-md space-y-4">
-        <h2 className="text-xl font-bold font-display text-slate-100 flex items-center gap-2">
-          <Compass className="w-5 h-5 text-cyan-400" />
-          Core Intellectual & Research Interests
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 space-y-1.5">
-            <h3 className="font-semibold text-slate-200 text-sm">Computational Quantum Physics</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Finite-difference time-domain wavepacket evolution, split-operator algorithms, quantum tunneling across semiconductor nanostructures, and numerical diagonalization.
-            </p>
-          </div>
-          <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 space-y-1.5">
-            <h3 className="font-semibold text-slate-200 text-sm">Laboratory Instrumentation</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Low-noise analog signal amplification, phase-sensitive lock-in detection, precision thermometry, automated GPIB/serial data collection, and rigorous uncertainty budgeting.
-            </p>
-          </div>
-          <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 space-y-1.5">
-            <h3 className="font-semibold text-slate-200 text-sm">Mathematical Physics & Nonlinear Dynamics</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Classical mechanics in Hamiltonian and Lagrangian formulations, phase space portraits, deterministic chaos in coupled systems, and Fourier analysis.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Skills Matrix */}
-      <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 md:p-8 backdrop-blur-md space-y-6">
-        <h2 className="text-xl font-bold font-display text-slate-100 flex items-center gap-2">
-          <Cpu className="w-5 h-5 text-cyan-400" />
-          Technical Competencies & Toolchain
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {skills.map((skillGroup, idx) => (
-            <div key={idx} className="p-5 rounded-xl bg-slate-950/70 border border-slate-800 space-y-3">
-              <h3 className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold">
-                {skillGroup.category}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {skillGroup.items.map((item, i) => (
-                  <span
-                    key={i}
-                    className="text-xs font-mono px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700/80 text-slate-200"
+          {/* Competency Pillars */}
+          <div className="space-y-4">
+            <h2 className="text-lg font-bold font-display text-slate-100">
+              Areas of Competency & Active Study
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {competencies.map((comp, idx) => {
+                const Icon = comp.icon;
+                return (
+                  <div
+                    key={idx}
+                    className="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 space-y-3"
                   >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Currently Reading & Learning Panel */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-        <div className="md:col-span-6 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 space-y-4">
-          <h2 className="text-base font-bold font-display text-slate-100 flex items-center gap-2">
-            <BookOpen className="w-4 h-4 text-cyan-400" />
-            Currently Studying & Reading
-          </h2>
-          <div className="space-y-3">
-            {currentReading.map((book, i) => (
-              <div key={i} className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 space-y-1">
-                <div className="font-semibold text-xs text-slate-200">{book.title}</div>
-                <div className="text-[11px] text-slate-500 font-serif italic">{book.author}</div>
-                <div className="text-[11px] font-mono text-cyan-400 pt-1 border-t border-slate-900">
-                  Focus: {book.status}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="md:col-span-6 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 space-y-4">
-          <h2 className="text-base font-bold font-display text-slate-100 flex items-center gap-2">
-            <Terminal className="w-4 h-4 text-cyan-400" />
-            Physics Philosophy & Mission
-          </h2>
-          <div className="text-xs text-slate-300 leading-relaxed space-y-3">
-            <p>
-              "Physics is not merely a collection of formulas to memorize, but a systematic mindset for unpacking the fundamental machinery of reality from first principles."
-            </p>
-            <p className="text-slate-400">
-              I believe deeply that true scientific understanding requires active synthesis: calculating analytically on paper, building numerical simulations to test intuition, and constructing physical hardware circuits in the laboratory to confront nature directly.
-            </p>
-            <div className="p-3 rounded-lg bg-cyan-950/30 border border-cyan-500/30 font-mono text-[11px] text-cyan-300">
-              💡 Open for undergraduate research collaborations, physics programming inquiries, and scientific discussions.
+                    <div className="flex items-center gap-2 text-cyan-400">
+                      <Icon className="w-4 h-4" />
+                      <h3 className="text-xs font-bold font-display text-slate-200">
+                        {comp.category}
+                      </h3>
+                    </div>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      {comp.description}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-800/80">
+                      {comp.skills.map((s, si) => (
+                        <span
+                          key={si}
+                          className="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-950 text-slate-300 border border-slate-800"
+                        >
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Academic Timeline */}
-      <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 md:p-8 backdrop-blur-md space-y-6">
-        <h2 className="text-xl font-bold font-display text-slate-100 flex items-center gap-2">
-          <Award className="w-5 h-5 text-cyan-400" />
-          Academic Trajectory & Milestones
-        </h2>
-
-        <div className="space-y-6 border-l-2 border-slate-800 ml-3 pl-6 relative">
-          {timeline.map((item, idx) => (
-            <div key={idx} className="relative space-y-1.5">
-              {/* Dot */}
-              <div className="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-cyan-500 border-2 border-slate-950"></div>
-
-              <div className="text-xs font-mono text-cyan-400 font-semibold">{item.period}</div>
-              <h3 className="text-sm font-bold text-slate-100">{item.role}</h3>
-              <div className="text-xs text-slate-400 font-medium">{item.institution}</div>
-              <p className="text-xs text-slate-400 leading-relaxed pt-1">{item.description}</p>
-            </div>
-          ))}
         </div>
       </div>
     </div>
